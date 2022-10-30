@@ -1,0 +1,52 @@
+version: '3.1'
+services:
+  discovery-service:
+    build: ./discovery-service/
+    hostname: discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - default-network
+
+  customer-service:
+    build: ./customer-service/
+    hostname: customer-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - discovery-service
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka
+    networks:
+      - default-network
+
+  billing-service:
+    build: ./billing-service/
+    hostname: billing-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - customer-service
+      - discovery-service
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka
+    networks:
+      - default-network
+
+  gateway-service:
+    build: ./gateway-service/
+    hostname: gateway-service
+    ports:
+      - "9999:9999"
+    depends_on:
+      - customer-service
+      - billing-service
+      - discovery-service
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka
+    networks:
+      - default-network
+
+networks:
+  default-network:
+    driver: bridge

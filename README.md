@@ -4,9 +4,9 @@ This is a project that demonstrates the use of Eureka Server for service discove
 
 The app consists of three microservices:
 
-- Customer Service: Provides API endpoints for managing customer data, such as creating new customers, updating customer information, and retrieving customer details.
-- Billing Service: Provides API endpoints for managing customer billing information, such as adding new charges, paying bills, and retrieving billing statements.
-- Discovery Service: Provides service discovery functionality for the Customer Service and Billing Service using Spring Cloud Gateway.
+- `Customer Service`: Provides API endpoints for managing customer data, such as creating new customers, updating customer information, and retrieving customer details.
+- `Billing Service`: Provides API endpoints for managing customer billing information, such as adding new charges, paying bills, and retrieving billing statements.
+- `Discovery Service`: Provides service discovery functionality for the Customer Service and Billing Service using Spring Cloud Gateway.
 
 ## Requirements
 
